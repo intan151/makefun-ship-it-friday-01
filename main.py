@@ -14,7 +14,14 @@ import os
 ENTRY = "feat: ship untested code to prod at 4:59pm Friday, tests passed in my imagination"
 
 
+def _self_check() -> None:
+    assert ENTRY, "entry must not be empty"
+    assert 1 <= len(ENTRY) <= 159, "entry must be 1-159 characters"
+    assert "\n" not in ENTRY, "entry must be a single line"
+
+
 def main() -> None:
+    _self_check()
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8", newline="\n") as f:
         f.write(ENTRY)
